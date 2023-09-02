@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Dashboard.Migrations.DashboardDb
 {
     /// <inheritdoc />
-    public partial class AuthTable : Migration
+    public partial class mytableaoth : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

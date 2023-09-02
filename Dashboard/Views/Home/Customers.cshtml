@@ -1,8 +1,6 @@
-﻿@model IEnumerable<Product>;
+﻿
 @{
 	Layout = "~/Views/Shared/_Layout.cshtml";
-	ViewData["Title"] = "Home Page";
-	var ProductDetails = ViewBag.ProductDetails;
 }
 
 <body dir="rtl" id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
@@ -136,7 +134,7 @@
 								<div class="card-header border-0 pt-6">
 									<!--begin::Card title-->
 									<div class="card-title">
-										<form asp-action="ProductDetails" method="post">
+										@*<form asp-action="Index" method="post">
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="p-2">
@@ -146,14 +144,15 @@
 													</div>
 												</div>
 											</div>
-										</form>
+										</form>*@
+
 									</div>
 									<!--begin::Card title-->
 									<!--begin::Card toolbar-->
 									<div class="card-toolbar">
 										<!--begin::Toolbar-->
 										<div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-											<button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal"> إضافة تفاصيل منتج</button>
+											@*<button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal"> إضافة منتج جديد</button>*@
 											<!--end::Add customer-->
 										</div>
 										<!--end::Toolbar-->
@@ -170,135 +169,14 @@
 								</div>
 								<!--end::Card header-->
 								<!--begin::Card body-->
-								<div class="card-body pt-0">
-									<!--begin::Table-->
-									<table class="table align-middle table-row-dashed fs-6 gy-5 text-center product-table" id="kt_customers_table">
-										<!--begin::Table head-->
-										<thead>
-											<!--begin::Table row-->
-											<tr class="text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-
-												<th style="font-family:cairo">رقم المنتج </th>
-												<th style="font-family:cairo">اسم المنتج </th>
-												<th style="font-family:cairo">وصف المنتج </th>
-												<th style="font-family:cairo"> الكمية </th>
-												<th style="font-family:cairo"> السعر </th>
-												<th style="font-family:cairo"> الموديل </th>
-												<th style="font-family:cairo"> اللون </th>
-												<th style="font-family:cairo" colspan="2">إجراء </th>
-
-											</tr>
-
-											<!--end::Table row-->
-										</thead>
-										<!--end::Table head-->
-										<!--begin::Table body-->
-										<tbody class="fw-semibold text-gray-600">
-											<!--to display the products name from Product Model without need for adding the name by a user-->
-											@foreach (var p in Model)
-											{
-												@if (ProductDetails != null)
-												{
-													@foreach (var item in ProductDetails)
-													{
-														@if (p.Id == @item.ProductId)
-														{
-															<tr>
-																<td>@item.Id</td>
-																<td>@p.ProductName</td>
-																<td>@item.Description</td>
-																<td>@item.QTY</td>
-																<td>@item.price رس</td>
-																<td>@item.Model</td>
-																<td>@item.Color</td>
-																<td><a class="col-6 text-danger" asp-action="DeleteProductDetails" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a></td>
-																<td><a class="col-6 text-info" asp-action="EditProductDetails" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a></td>
-															</tr>
-	
-
-														}
-														
-													}
-													
-												}
-
-											}
-											@*@if (Model != null)
-											{
-												@foreach (var item in Model)
-												{
-													<tr>
-														<td>@item.Id  @item.ProductId</td>
-														<td>@item.Description</td>
-														<td>@item.QTY</td>
-														<td>@item.price</td>
-														<td>@item.Model</td>
-														<td>@item.Color</td>
-													</tr>
-												}
-											}*@
-
-										</tbody>
-										<!--end::Table body-->
-									</table>
-									<!--end::Table-->
+								<div class="text-center">
+									<h3 style="font-family:Cairo">الصفحة قيد التطوير</h3>
+									<img src="~/assets/images/webPage-UnderDev.gif" style="height:300px;width:300px" />
 								</div>
-								<!--end::Card body-->
-							</div>
+							
 
 
-							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header row">
-											<h5 class="modal-title col-11" id="exampleModalLabel">إضافة منتج جديد</h5>
-											<button type="button" class="btn-close  col-1" data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<form asp-action="AddProductDetails" method="post">
-											<div class="modal-body row">
-												<div class="col-6 mb-3">
-													<label>اسم المنتج</label>
-													<select name="ProductId" class="form-select">
-														@foreach (var item in Model)
-														{
-															<option value="@item.Id">@item.ProductName</option>
-														}
-													</select>
-												</div>
-												<div class="col-6 mb-3">
-													<label for="Model" class="form-label">الطراز</label>
-													<input type="text" class="form-control" name="Model" id="Model">
-												</div>
-												<div class="col-6 mb-3">
-													<label for="QTY" class="form-label">الكمية</label>
-													<input type="text" class="form-control" name="QTY" id="QTY">
-												</div>
-												<div class="col-6 mb-3">
-													<label for="Color" class="form-label">اللون</label>
-													<input type="text" class="form-control" name="Color" id="Color">
-												</div>
-												<div class="col-6 mb-3">
-													<label for="price" class="form-label">السعر</label>
-													<input type="text" class="form-control" name="price" id="price">
-												</div>
-												<div class="col-6 mb-3">
-													<label for="Image" class="form-label">صورة المنتج</label>
-													<input type="text" class="form-control" name="Image" id="Image">
-												</div>
-												<div class="col-12 mb-3">
-													<label for="Description" class="form-label">الوصف</label>
-													<input type="text" class="form-control" name="Description" id="Description">
-												</div>
-											</div>
-											<div class="modal-footer">
-												<button type="submit" class="btn btn-primary rounded-pill">اضافة</button>
-												<button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">الغاء</button>
-											</div>
-										</form>
-
-									</div>
-								</div>
-							</div>
+						
 
 
 						</div>
