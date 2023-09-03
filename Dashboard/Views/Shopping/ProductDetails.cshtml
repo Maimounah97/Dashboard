@@ -1,0 +1,85 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutShopping.cshtml";
+    ViewData["Title"] = "Home Page";
+    var ProductDetails = ViewBag.ProductDetails;
+    var ProductDetailsList = ViewBag.ProductDetailsList;
+    var Product = ViewBag.Product;
+}
+@*<div class="row">
+<div class="col-2 bg-info">
+
+</div>*@
+
+<div class="mt-5 text-center">
+    <div class="card bg-white shadow p-5" style="max-width:700px; margin:auto">
+        <div class=row>
+        <div class="col-4">
+            <img src="@ProductDetails.Image" />
+        </div>
+        <div class="col-4">
+            <h2>@Product.ProductName</h2>
+            <p>@ProductDetails.Description</p>
+        </div>
+        <div class="col-4">
+            <p>@ProductDetails.price</p>
+                <a class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+        </div>
+    </div>
+    <h2>منتجات مشابهة</h2>
+    @if (ProductDetailsList != null)
+    {
+        @foreach (var item in ProductDetailsList)
+         {
+            @if (Product.Id == item.ProductId && item.Id != ProductDetails.Id)
+            {
+                <div class="col-lg-4 col-md-12 mb-4">
+                    <div class="card shadow">
+                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                             data-mdb-ripple-color="light">
+                            <img src="@item.Image"
+                                 class="w-100" />
+                        </div>
+                        <div class="card-body">
+                            <a href="" class="text-reset">
+                                <h5 class="card-title mb-3">@Product.ProductName</h5>
+                            </a>
+                            <h6 class="mb-3">@(item.price * 15 / 100 + item.price) رس</h6>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <button class="btn btn-success rounded-pill"><i class="fa-solid fa-cart-shopping"></i></button>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <a asp-action="ProductDetails" asp-route-id="@item.Id" asp-route-productId="@item.ProductId" class="btn btn-primary rounded-pill">عرض التفاصيل</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+     }
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                    <div class="modal-body">
+                        <p class="text-success" style="font-family:Cairo">تم إضافة المنتج بنجاح</p>
+                   
+                        <div class="modal-footer">
+                            <a type="submit" asp-action="Checkout" class="btn btn-primary rounded-pill">الإنتقال الى الدفع</a>
+                            <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">اكمال التسوق</button>
+                        </div>
+                     </div>
+              </div>
+   
+         </div>
+    </div>
+@*</div>*@
+
+
+
+
+
